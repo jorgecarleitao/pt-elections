@@ -1,0 +1,162 @@
+tipo_territorio,territorio,orgão,lista(2025),votos(2025),lista(2021),votos(2021)
+concelho,Amadora,cm,PS,23257,PS,27221
+concelho,Amadora,cm,PPD/PSD.CDS-PP.PPM.MPT.RIR,21147,PPD/PSD.CDS-PP.A.MPT.PDR,15230
+concelho,Amadora,cm,CH,12406,PCP-PEV,6162
+concelho,Amadora,cm,PCP-PEV,4933,CH,3375
+concelho,Amadora,cm,L,2513,B.E.,3305
+concelho,Amadora,cm,IL,2480,PAN,1933
+concelho,Amadora,cm,B.E.,1279,IL,1729
+concelho,Amadora,cm,ADN,458,PPM/R.I.R.,377
+concelho,Amadora,cm,,,MAS,227
+concelho,Amadora,am,PS,22195,PS,25290
+concelho,Amadora,am,PPD/PSD.CDS-PP.PPM.MPT.RIR,19468,PPD/PSD.CDS-PP.A.MPT.PDR,15052
+concelho,Amadora,am,CH,13328,PCP-PEV,6928
+concelho,Amadora,am,PCP-PEV,5510,B.E.,4232
+concelho,Amadora,am,L,3363,CH,4196
+concelho,Amadora,am,IL,2543,PAN,2752
+concelho,Amadora,am,B.E.,1540,PPM/R.I.R.,409
+concelho,Amadora,am,,,MAS,310
+freguesia,Alfragide,cm,PS,2699,PS,2756
+freguesia,Alfragide,cm,PPD/PSD.CDS-PP.PPM.MPT.RIR,2651,PPD/PSD.CDS-PP.A.MPT.PDR,2063
+freguesia,Alfragide,cm,CH,1167,PCP-PEV,453
+freguesia,Alfragide,cm,IL,392,IL,402
+freguesia,Alfragide,cm,PCP-PEV,365,B.E.,365
+freguesia,Alfragide,cm,L,325,CH,354
+freguesia,Alfragide,cm,B.E.,132,PAN,219
+freguesia,Alfragide,cm,ADN,22,PPM/R.I.R.,26
+freguesia,Alfragide,cm,,,MAS,23
+freguesia,Alfragide,am,PS,2553,PS,2462
+freguesia,Alfragide,am,PPD/PSD.CDS-PP.PPM.MPT.RIR,2519,PPD/PSD.CDS-PP.A.MPT.PDR,2251
+freguesia,Alfragide,am,CH,1228,PCP-PEV,515
+freguesia,Alfragide,am,IL,461,B.E.,485
+freguesia,Alfragide,am,L,443,CH,456
+freguesia,Alfragide,am,PCP-PEV,396,PAN,343
+freguesia,Alfragide,am,B.E.,153,MAS,39
+freguesia,Alfragide,am,,,PPM/R.I.R.,31
+freguesia,Alfragide,af,PS,3067,PS,2405
+freguesia,Alfragide,af,PPD/PSD.CDS-PP.PPM.MPT.RIR,2505,PPD/PSD.CDS-PP.A.MPT.PDR,2274
+freguesia,Alfragide,af,CH,1149,PCP-PEV,476
+freguesia,Alfragide,af,IL,418,B.E.,436
+freguesia,Alfragide,af,PCP-PEV,403,CH,404
+freguesia,Alfragide,af,B.E.,218,IL,393
+freguesia,Alfragide,af,,,PAN,276
+freguesia,Águas Livres,cm,PS,4707,PS,5622
+freguesia,Águas Livres,cm,PPD/PSD.CDS-PP.PPM.MPT.RIR,4490,PPD/PSD.CDS-PP.A.MPT.PDR,3099
+freguesia,Águas Livres,cm,CH,2500,PCP-PEV,1394
+freguesia,Águas Livres,cm,PCP-PEV,1194,B.E.,750
+freguesia,Águas Livres,cm,L,559,CH,713
+freguesia,Águas Livres,cm,IL,404,PAN,414
+freguesia,Águas Livres,cm,B.E.,339,IL,319
+freguesia,Águas Livres,cm,ADN,66,PPM/R.I.R.,66
+freguesia,Águas Livres,cm,,,MAS,46
+freguesia,Águas Livres,am,PS,4511,PS,5223
+freguesia,Águas Livres,am,PPD/PSD.CDS-PP.PPM.MPT.RIR,4087,PPD/PSD.CDS-PP.A.MPT.PDR,3034
+freguesia,Águas Livres,am,CH,2708,PCP-PEV,1578
+freguesia,Águas Livres,am,PCP-PEV,1325,B.E.,959
+freguesia,Águas Livres,am,L,723,CH,859
+freguesia,Águas Livres,am,IL,501,PAN,563
+freguesia,Águas Livres,am,B.E.,383,MAS,63
+freguesia,Águas Livres,am,,,PPM/R.I.R.,58
+freguesia,Águas Livres,af,PS,4573,PS,5117
+freguesia,Águas Livres,af,PPD/PSD.CDS-PP.PPM.MPT.RIR,4012,PPD/PSD.CDS-PP.A.MPT.PDR,3065
+freguesia,Águas Livres,af,CH,2725,PCP-PEV,1739
+freguesia,Águas Livres,af,PCP-PEV,1404,B.E.,977
+freguesia,Águas Livres,af,L,668,CH,875
+freguesia,Águas Livres,af,IL,468,PAN,577
+freguesia,Águas Livres,af,B.E.,390,,
+freguesia,Encosta do Sol,cm,PS,3769,PS,4368
+freguesia,Encosta do Sol,cm,PPD/PSD.CDS-PP.PPM.MPT.RIR,2654,PPD/PSD.CDS-PP.A.MPT.PDR,2040
+freguesia,Encosta do Sol,cm,CH,2048,PCP-PEV,1014
+freguesia,Encosta do Sol,cm,PCP-PEV,702,CH,553
+freguesia,Encosta do Sol,cm,L,306,B.E.,463
+freguesia,Encosta do Sol,cm,IL,256,PAN,258
+freguesia,Encosta do Sol,cm,B.E.,154,IL,236
+freguesia,Encosta do Sol,cm,ADN,50,PPM/R.I.R.,65
+freguesia,Encosta do Sol,cm,,,MAS,38
+freguesia,Encosta do Sol,am,PS,3632,PS,4219
+freguesia,Encosta do Sol,am,PPD/PSD.CDS-PP.PPM.MPT.RIR,2444,PPD/PSD.CDS-PP.A.MPT.PDR,1974
+freguesia,Encosta do Sol,am,CH,2168,PCP-PEV,1100
+freguesia,Encosta do Sol,am,PCP-PEV,769,CH,674
+freguesia,Encosta do Sol,am,L,411,B.E.,575
+freguesia,Encosta do Sol,am,IL,316,PAN,352
+freguesia,Encosta do Sol,am,B.E.,178,PPM/R.I.R.,72
+freguesia,Encosta do Sol,am,,,MAS,41
+freguesia,Encosta do Sol,af,PS,3958,PS,4432
+freguesia,Encosta do Sol,af,PPD/PSD.CDS-PP.PPM.MPT.RIR,2301,PPD/PSD.CDS-PP.A.MPT.PDR,1827
+freguesia,Encosta do Sol,af,CH,2057,PCP-PEV,1155
+freguesia,Encosta do Sol,af,PCP-PEV,812,CH,654
+freguesia,Encosta do Sol,af,L,360,B.E.,523
+freguesia,Encosta do Sol,af,IL,286,PAN,346
+freguesia,Encosta do Sol,af,B.E.,151,PPM/R.I.R.,84
+freguesia,Falagueira-Venda Nova,cm,PS,3135,PS,3565
+freguesia,Falagueira-Venda Nova,cm,PPD/PSD.CDS-PP.PPM.MPT.RIR,2200,PPD/PSD.CDS-PP.A.MPT.PDR,1569
+freguesia,Falagueira-Venda Nova,cm,CH,1371,PCP-PEV,849
+freguesia,Falagueira-Venda Nova,cm,PCP-PEV,735,B.E.,401
+freguesia,Falagueira-Venda Nova,cm,L,252,CH,396
+freguesia,Falagueira-Venda Nova,cm,IL,209,PAN,242
+freguesia,Falagueira-Venda Nova,cm,B.E.,157,IL,181
+freguesia,Falagueira-Venda Nova,cm,ADN,69,PPM/R.I.R.,31
+freguesia,Falagueira-Venda Nova,cm,,,MAS,21
+freguesia,Falagueira-Venda Nova,am,PS,3040,PS,3321
+freguesia,Falagueira-Venda Nova,am,PPD/PSD.CDS-PP.PPM.MPT.RIR,2028,PPD/PSD.CDS-PP.A.MPT.PDR,1544
+freguesia,Falagueira-Venda Nova,am,CH,1493,PCP-PEV,944
+freguesia,Falagueira-Venda Nova,am,PCP-PEV,757,CH,525
+freguesia,Falagueira-Venda Nova,am,L,354,B.E.,509
+freguesia,Falagueira-Venda Nova,am,IL,253,PAN,346
+freguesia,Falagueira-Venda Nova,am,B.E.,207,PPM/R.I.R.,29
+freguesia,Falagueira-Venda Nova,am,,,MAS,25
+freguesia,Falagueira-Venda Nova,af,PS,3362,PS,3396
+freguesia,Falagueira-Venda Nova,af,PPD/PSD.CDS-PP.PPM.MPT.RIR,1917,PPD/PSD.CDS-PP.A.MPT.PDR,1480
+freguesia,Falagueira-Venda Nova,af,CH,1442,PCP-PEV,985
+freguesia,Falagueira-Venda Nova,af,PCP-PEV,800,CH,517
+freguesia,Falagueira-Venda Nova,af,IL,258,B.E.,508
+freguesia,Falagueira-Venda Nova,af,B.E.,246,PAN,369
+freguesia,Falagueira-Venda Nova,af,ADN,99,,
+freguesia,Mina de Água,cm,PS,5680,PS,6896
+freguesia,Mina de Água,cm,PPD/PSD.CDS-PP.PPM.MPT.RIR,5601,PPD/PSD.CDS-PP.A.MPT.PDR,4012
+freguesia,Mina de Água,cm,CH,3592,PCP-PEV,1404
+freguesia,Mina de Água,cm,PCP-PEV,1142,CH,890
+freguesia,Mina de Água,cm,L,609,B.E.,819
+freguesia,Mina de Água,cm,IL,448,PAN,507
+freguesia,Mina de Água,cm,B.E.,304,IL,353
+freguesia,Mina de Água,cm,ADN,73,PPM/R.I.R.,113
+freguesia,Mina de Água,cm,,,MAS,56
+freguesia,Mina de Água,am,PS,5312,PS,6388
+freguesia,Mina de Água,am,PPD/PSD.CDS-PP.PPM.MPT.RIR,5115,PPD/PSD.CDS-PP.A.MPT.PDR,3856
+freguesia,Mina de Água,am,CH,3881,PCP-PEV,1609
+freguesia,Mina de Água,am,PCP-PEV,1333,CH,1103
+freguesia,Mina de Água,am,L,828,B.E.,1039
+freguesia,Mina de Água,am,IL,590,PAN,721
+freguesia,Mina de Água,am,B.E.,359,PPM/R.I.R.,133
+freguesia,Mina de Água,am,,,MAS,79
+freguesia,Mina de Água,af,PS,5428,PS,6420
+freguesia,Mina de Água,af,PPD/PSD.CDS-PP.PPM.MPT.RIR,5184,PPD/PSD.CDS-PP.A.MPT.PDR,3838
+freguesia,Mina de Água,af,CH,3845,PCP-PEV,1707
+freguesia,Mina de Água,af,PCP-PEV,1292,CH,1083
+freguesia,Mina de Água,af,L,776,B.E.,1036
+freguesia,Mina de Água,af,IL,557,PAN,739
+freguesia,Mina de Água,af,B.E.,351,PPM/R.I.R.,127
+freguesia,Venteira,cm,PPD/PSD.CDS-PP.PPM.MPT.RIR,3551,PS,4014
+freguesia,Venteira,cm,PS,3267,PPD/PSD.CDS-PP.A.MPT.PDR,2447
+freguesia,Venteira,cm,CH,1728,PCP-PEV,1048
+freguesia,Venteira,cm,PCP-PEV,795,B.E.,507
+freguesia,Venteira,cm,IL,771,CH,469
+freguesia,Venteira,cm,L,462,PAN,293
+freguesia,Venteira,cm,B.E.,193,IL,238
+freguesia,Venteira,cm,ADN,178,PPM/R.I.R.,76
+freguesia,Venteira,cm,,,MAS,43
+freguesia,Venteira,am,PPD/PSD.CDS-PP.PPM.MPT.RIR,3275,PS,3677
+freguesia,Venteira,am,PS,3147,PPD/PSD.CDS-PP.A.MPT.PDR,2393
+freguesia,Venteira,am,CH,1850,PCP-PEV,1182
+freguesia,Venteira,am,PCP-PEV,930,B.E.,665
+freguesia,Venteira,am,L,604,CH,579
+freguesia,Venteira,am,IL,422,PAN,427
+freguesia,Venteira,am,B.E.,260,PPM/R.I.R.,86
+freguesia,Venteira,am,,,MAS,63
+freguesia,Venteira,af,PPD/PSD.CDS-PP.PPM.MPT.RIR,3260,PS,3649
+freguesia,Venteira,af,PS,3226,PPD/PSD.CDS-PP.A.MPT.PDR,2444
+freguesia,Venteira,af,CH,1827,PCP-PEV,1241
+freguesia,Venteira,af,PCP-PEV,964,B.E.,668
+freguesia,Venteira,af,L,590,CH,553
+freguesia,Venteira,af,IL,417,PAN,438
+freguesia,Venteira,af,B.E.,240,PPM/R.I.R.,117
