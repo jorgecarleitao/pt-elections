@@ -1,9 +1,8 @@
 use futures::{FutureExt, StreamExt};
 use tracing;
 
-mod autarquicas2025;
+mod sources;
 mod fetch;
-mod legislativas2025;
 
 use crate::fetch::Source;
 
@@ -30,23 +29,33 @@ async fn main() -> Result<(), String> {
     .await;
     let client = &client;
 
-    let a_tasks = autarquicas2025::Autarquicas2025::keys().await.map(|key| {
+    /*
+    let tasks = sources::Autarquicas2025::keys().await.map(|key| {
         async move {
-            let _ = fetch::cached::<autarquicas2025::Autarquicas2025>(&key, client).await?;
+            let _ = fetch::cached::<sources::Autarquicas2025>(&key, client).await?;
             Ok::<(), std::io::Error>(())
         }
         .boxed()
     });
 
-    let tasks = legislativas2025::Legislativas2025::keys().await.map(|key| {
+    let tasks = sources::Legislativas2025::keys().await.map(|key| {
         async move {
-            let _ = fetch::cached::<legislativas2025::Legislativas2025>(&key, client).await?;
+            let _ = fetch::cached::<sources::Legislativas2025>(&key, client).await?;
+            Ok::<(), std::io::Error>(())
+        }
+        .boxed()
+    }).chain(tasks);
+ */
+
+    let tasks = sources::Legislativas2022::keys().await.map(|key| {
+        async move {
+            let _ = fetch::cached::<sources::Legislativas2022>(&key, client).await?;
             Ok::<(), std::io::Error>(())
         }
         .boxed()
     });
 
-    let _ = futures::stream::iter(tasks.chain(a_tasks))
+    let _ = futures::stream::iter(tasks)
         .buffered(10)
         .map(|r| {
             if let Err(e) = r {

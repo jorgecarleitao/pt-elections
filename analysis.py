@@ -8,6 +8,10 @@ import boto3.session
 
 
 TASKS = {
+    "legislativas2022": {
+        "path": "processed/legislativas2022/v1/all.json",
+        "sql": "etl/legislativas2022.sql",
+    },
     "legislativas2025": {
         "path": "processed/legislativas2025/v1/all.json",
         "sql": "etl/legislativas2025.sql",
@@ -22,15 +26,13 @@ TASKS = {
     }
 }
 DEPENDENCIES = {
-    "legislativas2025": set(),
-    "autarquicas2025": set(),
     "all": {"legislativas2025", "autarquicas2025"},
 }
 
 
 def _execute(s3_client, task: str):
     print(f"Executing task: {task}")
-    for dependency in DEPENDENCIES[task]:
+    for dependency in DEPENDENCIES.get(task, set()):
         _execute(s3_client, dependency)
 
     path = TASKS[task]["path"]

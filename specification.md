@@ -12,6 +12,7 @@ of each dataset.
 
 The raw data is sourced from the following websites:
 
+* `legislativas2022` for 2019 and 2022 eleicões legislativas from https://www.eleicoes.mai.gov.pt/legislativas2022
 * `autarquicas2025` for 2021 and 2025 eleicões autárquicas from https://www.autarquicas2025.mai.gov.pt
 * `legislativas2025` from 2024 and 2025 eleicões legislativas from https://www.eleicoes.mai.gov.pt/legislativas2025
 
@@ -26,9 +27,11 @@ columns:
     description: Unique identifier of the election
     invariants:
       - one_of:
+        - legislativas(2019)
+        - autarquicas(2021)
+        - legislativas(2022)
         - legislativas(2024)
         - legislativas(2025)
-        - autarquicas(2021)
         - autarquicas(2025)
   territory_type:
     type: string
