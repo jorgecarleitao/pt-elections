@@ -156,3 +156,7 @@ AND territory = 'Europa'
 ```
 
 represents the voters registered in Europa and how they voted for their electoral circle (Europa) in legislativas 2025.
+
+#### Other examples
+
+You can find these and other examples at [./examples](./examples/).

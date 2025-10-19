@@ -20,6 +20,13 @@ Data flow:
 
 The last item is the dataset described in the [specification.md](specification.md).
 
+## How to generate the dataset
+
+1. `add .env` with two variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
+2. `export $(cat .env | xargs)`
+3. Run `RUST_LOG=INFO cargo run` to extract from the source
+4. Run `python analysis.py` (install boto3 and duckdb) to produce final analysis
+
 ## Design decisions
 
 * Use Rust to read sources, that offers excellent performance and control over async environment
