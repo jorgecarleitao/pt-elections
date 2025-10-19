@@ -7,5 +7,3 @@ You can find its specification and instructions on how to use the dataset here: 
 ## How to develop
 
 This project uses Rust for downloading and storing the data, and DuckDB/SQL/Python for analysis and agregations.
-
-The

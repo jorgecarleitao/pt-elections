@@ -22,26 +22,26 @@ COPY (
         read_json("s3://pt-elections/raw/legislativas2025/*.json", union_by_name=True, filename=True)
 ) TO 's3://pt-elections/processed/legislativas2025/v1/all.json';
 
--- -- processed for autarquicas 2025
--- COPY (
---     SELECT
---         CASE
---             WHEN ends_with(filename, '4.json') THEN 'cm'
---             WHEN ends_with(filename, '5.json') THEN 'am'
---             WHEN ends_with(filename, '6.json') THEN 'af'
---         END AS organ_type,
---         CASE
---             WHEN data.territoryTypeId == 2 THEN 'país'
---             WHEN data.territoryTypeId == 5 THEN 'distrito'
---             WHEN data.territoryTypeId == 6 THEN 'concelho'
---             WHEN data.territoryTypeId == 7 THEN 'freguesia'
---         END AS territory_type,
---         data.territoryName AS territory,
---         data.currentResults,
---         data.previousResults
---     FROM
---         read_json("s3://pt-elections/raw/autarquicas2025/*/*.json", union_by_name=True, filename=True)
--- ) TO 's3://pt-elections/processed/autarquicas2025/v1/all.json';
+-- processed for autarquicas 2025
+COPY (
+    SELECT
+        CASE
+            WHEN ends_with(filename, '4.json') THEN 'cm'
+            WHEN ends_with(filename, '5.json') THEN 'am'
+            WHEN ends_with(filename, '6.json') THEN 'af'
+        END AS organ_type,
+        CASE
+            WHEN data.territoryTypeId == 2 THEN 'país'
+            WHEN data.territoryTypeId == 5 THEN 'distrito'
+            WHEN data.territoryTypeId == 6 THEN 'concelho'
+            WHEN data.territoryTypeId == 7 THEN 'freguesia'
+        END AS territory_type,
+        data.territoryName AS territory,
+        data.currentResults,
+        data.previousResults
+    FROM
+        read_json("s3://pt-elections/raw/autarquicas2025/*/*.json", union_by_name=True, filename=True)
+) TO 's3://pt-elections/processed/autarquicas2025/v1/all.json';
 
 COPY (
 WITH autarquicas_2025 AS (
@@ -52,12 +52,12 @@ WITH autarquicas_2025 AS (
     organ_type,
     unnest(
         list_concat(
-            list_transform(currentResults.resultsParty, lambda x: {'list': x['acronym'], 'count': x['votes']}),
+            list_transform(currentResults.resultsParty, lambda x: {'list': x['acronym'], 'count': x['votes'], 'percentage': x['percentage'], 'mandates': x['mandates']}),
             [
-                {'list': 'inscritos', 'count': currentResults.subscribedVoters},
-                {'list': 'votantes', 'count': currentResults.totalVoters},
-                {'list': 'brancos', 'count': currentResults.blankVotes},
-                {'list': 'nulos', 'count': currentResults.nullVotes}
+                {'list': 'inscritos', 'count': currentResults.subscribedVoters, 'percentage': 100, 'mandates': currentResults.totalMandates},
+                {'list': 'votantes', 'count': currentResults.totalVoters, 'percentage': currentResults.percentageVoters, 'mandates': 0},
+                {'list': 'brancos', 'count': currentResults.blankVotes, 'percentage': currentResults.blankVotesPercentage, 'mandates': 0},
+                {'list': 'nulos', 'count': currentResults.nullVotes, 'percentage': currentResults.nullVotesPercentage, 'mandates': 0}
             ]
         ),
         recursive := true
@@ -73,12 +73,12 @@ WITH autarquicas_2025 AS (
     organ_type,
     unnest(
         list_concat(
-            list_transform(previousResults.resultsParty, lambda x: {'list': x['acronym'], 'count': x['votes']}),
+            list_transform(previousResults.resultsParty, lambda x: {'list': x['acronym'], 'count': x['votes'], 'percentage': x['percentage'], 'mandates': x['mandates']}),
             [
-                {'list': 'inscritos', 'count': previousResults.subscribedVoters},
-                {'list': 'votantes', 'count': previousResults.totalVoters},
-                {'list': 'brancos', 'count': previousResults.blankVotes},
-                {'list': 'nulos', 'count': previousResults.nullVotes}
+                {'list': 'inscritos', 'count': previousResults.subscribedVoters, 'percentage': 100, 'mandates': previousResults.totalMandates},
+                {'list': 'votantes', 'count': previousResults.totalVoters, 'percentage': previousResults.percentageVoters, 'mandates': 0},
+                {'list': 'brancos', 'count': previousResults.blankVotes, 'percentage': previousResults.blankVotesPercentage, 'mandates': 0},
+                {'list': 'nulos', 'count': previousResults.nullVotes, 'percentage': previousResults.nullVotesPercentage, 'mandates': 0}
             ]
         ),
         recursive := true
@@ -94,12 +94,12 @@ WITH autarquicas_2025 AS (
     'ar' AS organ_type,
     unnest(
         list_concat(
-            list_transform(currentResults.resultsParty, lambda x: {'list': x['acronym'], 'count': x['votes']}),
+            list_transform(currentResults.resultsParty, lambda x: {'list': x['acronym'], 'count': x['votes'], 'percentage': x['percentage'], 'mandates': x['mandates']}),
             [
-                {'list': 'inscritos', 'count': currentResults.subscribedVoters},
-                {'list': 'votantes', 'count': currentResults.totalVoters},
-                {'list': 'brancos', 'count': currentResults.blankVotes},
-                {'list': 'nulos', 'count': currentResults.nullVotes}
+                {'list': 'inscritos', 'count': currentResults.subscribedVoters, 'percentage': 100, 'mandates': currentResults.totalMandates},
+                {'list': 'votantes', 'count': currentResults.totalVoters, 'percentage': currentResults.percentageVoters, 'mandates': 0},
+                {'list': 'brancos', 'count': currentResults.blankVotes, 'percentage': currentResults.blankVotesPercentage, 'mandates': 0},
+                {'list': 'nulos', 'count': currentResults.nullVotes, 'percentage': currentResults.nullVotesPercentage, 'mandates': 0}
             ]
         ),
         recursive := true
@@ -115,12 +115,12 @@ WITH autarquicas_2025 AS (
     'ar' AS organ_type,
     unnest(
         list_concat(
-            list_transform(previousResults.resultsParty, lambda x: {'list': x['acronym'], 'count': x['votes']}),
+            list_transform(previousResults.resultsParty, lambda x: {'list': x['acronym'], 'count': x['votes'], 'percentage': x['percentage'], 'mandates': x['mandates']}),
             [
-                {'list': 'inscritos', 'count': previousResults.subscribedVoters},
-                {'list': 'votantes', 'count': previousResults.totalVoters},
-                {'list': 'brancos', 'count': previousResults.blankVotes},
-                {'list': 'nulos', 'count': previousResults.nullVotes}
+                {'list': 'inscritos', 'count': previousResults.subscribedVoters, 'percentage': 100, 'mandates': previousResults.totalMandates},
+                {'list': 'votantes', 'count': previousResults.totalVoters, 'percentage': previousResults.percentageVoters, 'mandates': 0},
+                {'list': 'brancos', 'count': previousResults.blankVotes, 'percentage': previousResults.blankVotesPercentage, 'mandates': 0},
+                {'list': 'nulos', 'count': previousResults.nullVotes, 'percentage': previousResults.nullVotesPercentage, 'mandates': 0}
             ]
         ),
         recursive := true

@@ -88,11 +88,19 @@ columns:
       - inscritos
   count:
     type: integer
-    description: The number of votes/voters for the list casted on `election`, `territory_type`, `territory` and `list`
+    description: The number of votes/voters for the list casted on `election`, `territory_type`, `territory` and `list`.
+  mandates:
+    type: integer
+    description: |
+      The number of assigned mandates according to whatever method is used to assign mandates used in the election.
+      This is the total number of mandates for list `inscritos`.
+  percentage:
+    type: float
+    description: The effective percentage obtained by each list (i.e. after discounting nulls and blanks).
 invariants:
   - type: uniqueness
     columns: [election, territory_type, territory, organ_type, list]
-    description: for each election, for each territory_type, for each territory, for each organ_type and for each list, there is exactly one number - the number of casted votes
+    description: for each election, for each territory_type, for each territory, for each organ_type and for each list, there is exactly one row - the outcomes of casted votes
 ```
 
 ## How to use
