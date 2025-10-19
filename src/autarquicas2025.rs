@@ -6,15 +6,6 @@ pub struct Key {
     organ_id: usize,
 }
 
-impl Key {
-    pub fn iter() -> impl Iterator<Item = Self> {
-        (1..=3588)
-            .map(|location| location.to_string())
-            .cartesian_product(vec![4, 5, 6])
-            .map(|(location, organ_id)| Key { location, organ_id })
-    }
-}
-
 impl std::fmt::Display for Key {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}/{}", self.location, self.organ_id)
@@ -29,6 +20,13 @@ impl crate::fetch::Source for Autarquicas2025 {
     }
 
     type KeyType = Key;
+
+    async fn keys() -> impl Iterator<Item = Self::KeyType> {
+        (1..=3588)
+            .map(|location| location.to_string())
+            .cartesian_product(vec![4, 5, 6])
+            .map(|(location, organ_id)| Key { location, organ_id })
+    }
 
     fn request(key: &Self::KeyType) -> reqwest::Request {
         let mut headers = reqwest::header::HeaderMap::new();

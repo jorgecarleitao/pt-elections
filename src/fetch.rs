@@ -6,6 +6,7 @@ use reqwest_retry::policies::ExponentialBackoff;
 pub trait Source {
     fn name() -> &'static str;
     type KeyType: std::fmt::Debug + std::fmt::Display;
+    async fn keys() -> impl Iterator<Item = Self::KeyType>;
     fn request(key: &Self::KeyType) -> reqwest::Request;
 }
 

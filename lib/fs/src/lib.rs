@@ -7,7 +7,7 @@ pub use cache::*;
 
 /// An object that can be used to get and put blobs.
 #[async_trait::async_trait]
-pub trait BlobStorageProvider {
+pub trait BlobStorageProvider: Send + Sync {
     async fn maybe_get(&self, blob_name: &str) -> Result<Option<Vec<u8>>, std::io::Error>;
     async fn put(&self, blob_name: &str, contents: Vec<u8>) -> Result<(), std::io::Error>;
     async fn list(&self, prefix: &str) -> Result<Vec<String>, std::io::Error>;

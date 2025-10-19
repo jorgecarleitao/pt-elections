@@ -1,49 +1,138 @@
 SET s3_endpoint='fsn1.your-objectstorage.com';
 SET s3_region='fsn1';
 
-WITH raw_data AS (
+-- processed for legislativas 2025
+COPY (
     SELECT
-    CASE
-        WHEN ends_with(filename, '4.json') THEN 'cm'
-        WHEN ends_with(filename, '5.json') THEN 'am'
-        WHEN ends_with(filename, '6.json') THEN 'af'
-    END AS organ_type,
-    CASE
-        WHEN data.territoryTypeId == 2 THEN 'país'
-        WHEN data.territoryTypeId == 5 THEN 'distrito'
-        WHEN data.territoryTypeId == 6 THEN 'concelho'
-        WHEN data.territoryTypeId == 7 THEN 'freguesia'
-    END AS territory_type,
-    data.*,
-FROM
-    read_json("s3://pt-elections/raw/autarquicas2025/*/*.json", union_by_name=True, filename=True)
+        territoryName AS territory,
+        CASE
+            WHEN ends_with(parse_filename(filename), 'LOCAL-500000.json') THEN 'país'
+            WHEN starts_with(parse_filename(filename), 'LOCAL') AND ends_with(parse_filename(filename), '0000.json') THEN 'distrito'
+            WHEN starts_with(parse_filename(filename), 'LOCAL') AND ends_with(parse_filename(filename), '00.json') THEN 'concelho'
+            WHEN starts_with(parse_filename(filename), 'LOCAL') THEN 'freguesia'
+            WHEN ends_with(parse_filename(filename), 'FOREIGN-600000.json') THEN 'zona estrangeira'
+            WHEN ends_with(parse_filename(filename), 'FOREIGN-800000.json') THEN 'zona estrangeira'
+            WHEN ends_with(parse_filename(filename), 'FOREIGN-900000.json') THEN 'zona estrangeira'
+            WHEN starts_with(parse_filename(filename), 'FOREIGN') AND ends_with(parse_filename(filename), '00.json') THEN 'zona estrangeira'
+            WHEN starts_with(parse_filename(filename), 'FOREIGN') THEN 'posto consular'
+        END AS territory_type,
+        currentResults,
+        previousResults
+    FROM
+        read_json("s3://pt-elections/raw/legislativas2025/*.json", union_by_name=True, filename=True)
+) TO 's3://pt-elections/processed/legislativas2025/v1/all.json';
+
+-- -- processed for autarquicas 2025
+-- COPY (
+--     SELECT
+--         CASE
+--             WHEN ends_with(filename, '4.json') THEN 'cm'
+--             WHEN ends_with(filename, '5.json') THEN 'am'
+--             WHEN ends_with(filename, '6.json') THEN 'af'
+--         END AS organ_type,
+--         CASE
+--             WHEN data.territoryTypeId == 2 THEN 'país'
+--             WHEN data.territoryTypeId == 5 THEN 'distrito'
+--             WHEN data.territoryTypeId == 6 THEN 'concelho'
+--             WHEN data.territoryTypeId == 7 THEN 'freguesia'
+--         END AS territory_type,
+--         data.territoryName AS territory,
+--         data.currentResults,
+--         data.previousResults
+--     FROM
+--         read_json("s3://pt-elections/raw/autarquicas2025/*/*.json", union_by_name=True, filename=True)
+-- ) TO 's3://pt-elections/processed/autarquicas2025/v1/all.json';
+
+COPY (
+WITH autarquicas_2025 AS (
+    SELECT
+    'autarquicas(2025)' AS election,
+    territory_type,
+    territory,
+    organ_type,
+    unnest(
+        list_concat(
+            list_transform(currentResults.resultsParty, lambda x: {'list': x['acronym'], 'count': x['votes']}),
+            [
+                {'list': 'inscritos', 'count': currentResults.subscribedVoters},
+                {'list': 'votantes', 'count': currentResults.totalVoters},
+                {'list': 'brancos', 'count': currentResults.blankVotes},
+                {'list': 'nulos', 'count': currentResults.nullVotes}
+            ]
+        ),
+        recursive := true
+    )
+    FROM read_json('s3://pt-elections/processed/autarquicas2025/v1/all.json')
 )
-SELECT
-    territory_type AS 'tipo_territorio',
-    territoryName AS 'territorio',
-    organ_type AS 'orgão',
+
+, autarquicas_2021 AS (
+    SELECT
+    'autarquicas(2021)' AS election,
+    territory_type,
+    territory,
+    organ_type,
     unnest(
         list_concat(
-            list_transform(currentResults.resultsParty, lambda x: {'lista(2025)': x['acronym'], 'votos(2025)': x['votes']}),
+            list_transform(previousResults.resultsParty, lambda x: {'list': x['acronym'], 'count': x['votes']}),
             [
-                {'lista(2025)': 'inscritos', 'votos(2025)': currentResults.subscribedVoters},
-                {'lista(2025)': 'votantes', 'votos(2025)': currentResults.totalVoters},
-                {'lista(2025)': 'brancos', 'votos(2025)': currentResults.blankVotes},
-                {'lista(2025)': 'nulos', 'votos(2025)': currentResults.nullVotes}
+                {'list': 'inscritos', 'count': previousResults.subscribedVoters},
+                {'list': 'votantes', 'count': previousResults.totalVoters},
+                {'list': 'brancos', 'count': previousResults.blankVotes},
+                {'list': 'nulos', 'count': previousResults.nullVotes}
             ]
         ),
         recursive := true
-    ),
+    )
+    FROM read_json('s3://pt-elections/processed/autarquicas2025/v1/all.json')
+)
+
+, legislativas2025 AS (
+    SELECT
+    'legislativas(2025)' AS election,
+    territory_type,
+    territory,
+    'ar' AS organ_type,
     unnest(
         list_concat(
-            list_transform(previousResults.resultsParty, lambda x: {'lista(2021)': x['acronym'], 'votos(2021)': x['votes']}),
+            list_transform(currentResults.resultsParty, lambda x: {'list': x['acronym'], 'count': x['votes']}),
             [
-                {'lista(2021)': 'inscritos', 'votos(2021)': previousResults.subscribedVoters},
-                {'lista(2021)': 'votantes', 'votos(2021)': previousResults.totalVoters},
-                {'lista(2021)': 'brancos', 'votos(2021)': previousResults.blankVotes},
-                {'lista(2021)': 'nulos', 'votos(2021)': previousResults.nullVotes}
+                {'list': 'inscritos', 'count': currentResults.subscribedVoters},
+                {'list': 'votantes', 'count': currentResults.totalVoters},
+                {'list': 'brancos', 'count': currentResults.blankVotes},
+                {'list': 'nulos', 'count': currentResults.nullVotes}
             ]
         ),
         recursive := true
-    ),
-FROM raw_data
+    )
+    FROM read_json('s3://pt-elections/processed/legislativas2025/v1/all.json')
+)
+
+, legislativas2024 AS (
+    SELECT
+    'legislativas(2024)' AS election,
+    territory_type,
+    territory,
+    'ar' AS organ_type,
+    unnest(
+        list_concat(
+            list_transform(previousResults.resultsParty, lambda x: {'list': x['acronym'], 'count': x['votes']}),
+            [
+                {'list': 'inscritos', 'count': previousResults.subscribedVoters},
+                {'list': 'votantes', 'count': previousResults.totalVoters},
+                {'list': 'brancos', 'count': previousResults.blankVotes},
+                {'list': 'nulos', 'count': previousResults.nullVotes}
+            ]
+        ),
+        recursive := true
+    )
+    FROM read_json('s3://pt-elections/processed/legislativas2025/v1/all.json')
+)
+
+SELECT * FROM autarquicas_2025
+UNION ALL 
+SELECT * FROM autarquicas_2021
+UNION ALL
+SELECT * FROM legislativas2024
+UNION ALL
+SELECT * FROM legislativas2025
+) TO 's3://pt-elections/processed/v1/all.csv';

@@ -1,8 +1,11 @@
-use futures::StreamExt;
+use futures::{FutureExt, StreamExt};
 use tracing;
 
+mod autarquicas2025;
 mod fetch;
-mod sources;
+mod legislativas2025;
+
+use crate::fetch::Source;
 
 #[tokio::main]
 async fn main() -> Result<(), String> {
@@ -27,14 +30,23 @@ async fn main() -> Result<(), String> {
     .await;
     let client = &client;
 
-    let keys = <sources::Autarquicas2025 as fetch::Source>::KeyType::iter();
-
-    let tasks = keys.map(|key| async move {
-        let _ = fetch::cached::<sources::Autarquicas2025>(&key, client).await?;
-        Ok::<(), std::io::Error>(())
+    let a_tasks = autarquicas2025::Autarquicas2025::keys().await.map(|key| {
+        async move {
+            let _ = fetch::cached::<autarquicas2025::Autarquicas2025>(&key, client).await?;
+            Ok::<(), std::io::Error>(())
+        }
+        .boxed()
     });
 
-    let _ = futures::stream::iter(tasks)
+    let tasks = legislativas2025::Legislativas2025::keys().await.map(|key| {
+        async move {
+            let _ = fetch::cached::<legislativas2025::Legislativas2025>(&key, client).await?;
+            Ok::<(), std::io::Error>(())
+        }
+        .boxed()
+    });
+
+    let _ = futures::stream::iter(tasks.chain(a_tasks))
         .buffered(10)
         .map(|r| {
             if let Err(e) = r {
